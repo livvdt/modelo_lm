@@ -1,0 +1,29 @@
+---
+Iremos prever qual será o custo inicial utilizando o valor de taxa anual da franquia de R$ 1.000,00
+---
+```{r}
+#importando os dados
+dados = read.csv('slr12.csv', sep = ';')
+dados
+```
+
+```{r}
+#criar modelo de regressão linear para realizar a previsão
+modelo = lm(CusInic ~ FrqAnual, data = dados)
+modelo
+```
+
+```{r}
+#criar gráfico de dispersão para visualizar a distribuição dos dados
+plot(CusInic ~FrqAnual, data = dados)
+abline(modelo)
+```
+
+```{r}
+#usando o modelo
+#valor anual da franquia
+Frqvalr =  1000
+#prevendo
+previsao =  predict(modelo,data.frame(FrqAnual = Frqvalr))
+previsao = paste0("Prevemos que o Custo Inicial seja de R$: ",round(previsao,2))
+print(previsao)
